@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jack3933的个人博客</title>
+    <link rel="stylesheet" href="/static/my/css/index.css">
+    <link rel="stylesheet" href="/static/my/css/reset.css">
+    <script src="/static/vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <link rel="stylesheet" :href="'/static/my/css/theme/'+theme+'.css'">
+        <nav>
+            <div class="left">
+                <a href="#">首页</a>
+                <a href="#">新闻</a>
+                <a href="#">心情</a>
+                <a href="#">关于</a>
+            </div>
+            <div class="right">
+                <img v-show="theme === 'dark'" src="/static/my/img/nav/light.svg" alt="" @click="setTheme('light')">
+                <img v-show="theme === 'light'" src="/static/my/img/nav/dark.svg" alt="" @click="setTheme('dark')">
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+            </div>
+        </nav>
+        <header>
+            {% for img in img_list %}
+            <div class="dynamic_shuffle">
+                <img src="{{ img }}" alt="">
+            </div>
+            {% endfor %}
+        </header>
+        <main>
+            内容区域
+        </main>
+        <footer>      
+            底部信息栏
+        </footer>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            delimiters: [ "[[", "]]" ],
+            data: {
+                theme: 'light',   // 默认主题
+            },
+            created() {
+                this.initTheme();
+
+            },
+            methods: {
+                // 初始化主题
+                initTheme() {
+                    let theme = localStorage.getItem('theme')
+                    if(theme) {
+                        this.theme = theme;
+                    }
+                },
+                // 设置主题
+                setTheme(themeName) {
+                    this.theme = themeName;
+                    // 持久化储存
+                    localStorage.setItem('theme', themeName);
+                },
+            },
+        });
+        let menu_imgs = document.querySelectorAll('.dynamic_shuffle');
+        let menu_length = menu_imgs.length;
+        let index = 0;
+        let timer = null;
+        clearInterval(timer)
+        timer = setInterval(()=>{
+            index++;
+            if (index === menu_length) {
+                index = 0;
+            }
+            for (let i of menu_imgs) {
+                i.style.opacity = 0;
+            }
+            menu_imgs[index].style.opacity = 1;
+        }, 2000)
+    </script>
+</body>
+</html>
