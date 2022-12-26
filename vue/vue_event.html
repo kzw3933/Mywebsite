@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+           {{ num }}
+        </div>
+        <div>
+          <button v-on:click="add(10, $event)">点我+1</button>
+          <button @click="num--">点我-1</button>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",  // vue挂载的位置不能是body
+            data: {
+                num: 10,
+            },
+            methods: {
+              add(number, event) {
+                this.num += number;
+                console.log(event.target);
+              },
+            }
+        })
+    </script>
+</body>
+</html>

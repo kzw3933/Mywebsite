@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my_header></my_header>
+        <my_header></my_header>
+        <my_footer></my_footer>
+    </div>
+    <script>
+        let my_footer = {
+            data() {
+                return {};
+            },
+            template:`
+                <div>
+                    我是尾部组件
+                </div>
+            `,
+        }
+
+
+        let my_header = {
+            data() {
+                return {msg: '组件中的msg', num: 10};
+            },
+            template: `
+                <div>
+                    <div class="left">导航栏左部分</div>
+                    <div class="right">导航栏右部分</div>
+                    <button @click="add">+1</button>
+                    <span>{{ msg }}</span>
+                </div>
+            `,
+            methods:{
+                add() {
+                    this.num += 1;
+                }
+            },
+            created() {
+                console.log(1);
+            }
+
+        };
+
+        new Vue({
+            el: "#app",  // vue挂载的位置不能是body
+            data: {
+                msg: 'kzw',
+            },
+            components: {
+                my_header,
+                my_footer,
+            },
+        })
+    </script>
+</body>
+</html>

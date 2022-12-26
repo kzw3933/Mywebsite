@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue双向事件绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+          <input type="text" v-model="msg">
+          <button @click="getMsg">获取msg</button>
+          <select v-model="selected">
+            <option :value="item.value" :key="item.value" v-for="item in select_list">{{ item.label }}</option>
+          </select>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",  // vue挂载的位置不能是body
+            data: {
+                msg: 'kzw',
+                selected: 2,
+                select_list: [
+                  {value: 1, label: "麻辣烫"},
+                  {value: 2, label: "热干面"},
+                  {value: 3, label: "方便面"},
+                  {value: 4, label: "米饭"},
+                ]
+            },
+            methods: {
+                getMsg() {
+                  alert(this.msg);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
