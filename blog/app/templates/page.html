@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pages</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+      .page_list {
+        padding-left:0 ;
+      }
+      .page_list ul {
+        width: 100%;
+        text-align: center;
+      }
+      .page_list a {
+        display: block;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        background-color: #f4f4f6;
+        color: #959595;
+        text-decoration: None;
+        line-height: 30px;
+        border-radius: 5px;
+      }
+      .page_list a.active {
+        background-color: #2f96fd;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+  <div class="clearfix">
+    <ul>
+      {% for student in student_list %}
+      <li>
+        <span>{{ student.nid }}</span>
+        <span>{{ student.name }}</span>
+        <span>{{ student.gender }}</span>
+        <span>{{ student.age }}</span>
+        <span>{{ student.addr }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <nav class="page_list">
+    <ul>
+      {% if student_list.has_previous %}
+      <a href="?page={{ student_list.previous_page_number }}"><</a>
+      {% endif %}
+      {% for page in page_list %}
+        {% if p == page %}
+          <a href="?page={{ page }}" class="active">{{ page }}</a>
+        {% else %}
+          <a href="?page={{ page }}">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if student_list.has_next %}
+      <a href="?page={{ student_list.next_page_number }}">></a>
+      {% endif %}
+    </ul>
+  </nav>
+</body>
+</html>

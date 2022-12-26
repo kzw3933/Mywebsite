@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生注册</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <style>
+    form {
+      width: 20%;
+      margin-left: 40%;
+      margin-top: 10%;
+    }
+    ul {
+      padding-left: 0;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="name">学生姓名</label>
+      <input type="text" id="name" name="name" class="form-control" value="{{ form.cleaned_data.name }}">
+      <span>{{ form.errors.name }}</span>
+    </div>
+    <div class="form-group">
+      <label for="age">学生年龄</label>
+      <input type="text" id="age" name="age" class="form-control" value="{{ form.cleaned_data.age }}">
+      <span>{{ form.errors.age }}</span>
+    </div>
+    <div class="form-group">
+      <label>学生性别</label>
+      <div>
+        <input type="radio" name="gender" value="男" checked> 男
+        <input type="radio" name="gender" value="女"> 女
+      </div>
+      <span>{{ form.errors.gender }}</span>
+    </div>
+    <div class="form-group">
+      <label for="address">学生地址</label>
+      <input type="text" id="address" name="address" class="form-control" value="{{ form.cleaned_data.addr }}">
+      <span>{{ form.errors.address }}</span>
+    </div>
+    <input type="submit" value="提交" class="btn btn-default">
+  </form>
+</body>
+</html>

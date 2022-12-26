@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+  <p>{{ name }} 的网页</p>
+  <p>列表:  {{ alist }}</p>
+  <p>字典:  {{ adict }}</p>
+  <p>列表的第一个元素:  {{ alist.0 }}</p>
+  <p>字典的name字段: {{ adict.name }}</p>
+  <p>函数结果:  {{ func }}</p>
+  <p>对象:    {{ aobj }}</p>
+  <p>对象的name属性: {{ aobj.name }}</p>
+  <p>对象的play方法结果: {{ aobj.play }}</p>
+  <p>列表遍历: </p>
+  <ul>
+      {% for i in alist %}
+      <li>
+          {{ forloop.counter }}{{ i }}
+      </li>
+      {% endfor %}
+  </ul>
+  <p>字典遍历: </p>
+  <ul>
+      {% for k,v in adict.items %}
+      <li>
+          key: {{ k }} value: {{ v }}
+      </li>
+      {% endfor %}
+  </ul>
+  {% if adict.age >= 20 %}
+    <p>年龄大于20岁</p>
+  {% else %}
+    <p>年龄太小了</p>
+  {% endif %}
+
+  <p>过滤超长字符串:</p>
+  <p>{{ alongstr|truncatechars:4 }}</p>
+  <p>现在时间:</p>
+  <p>{{ time_now|date:"Y-m-d H:i:s" }}</p>
+  <p>登陆状态:</p>
+  <p>{{ login|default:"未登录" }}</p>
+  <p>数组长度:</p>
+  <p>{{ alist|length }}</p>
+  <p>数组中随机选择一个数:</p>
+  <p>{{ alist|random }}</p>
+  <p>超链接:</p>
+  <p>{{ ahref|safe }}</p>
+
+  <p>自定义过滤器(最多两个参数):</p>
+  {% load tags %}
+  <p>{{ 5|multi:4 }}</p>
+
+  <p>自定义标签:</p>
+  {% add_t 1 2 3 %}
+</body>
+</html>
