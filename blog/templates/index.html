@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load my_tag %}
 <head>
     <meta charset="UTF-8">
     <title>jack3933的个人博客</title>
@@ -11,31 +12,49 @@
     <div id="app">
         <link rel="stylesheet" :href="'/static/my/css/theme/'+theme+'.css'">
         <nav>
-            <div class="left">
+            <div id="left">
                 <a href="#">首页</a>
                 <a href="#">新闻</a>
                 <a href="#">心情</a>
                 <a href="#">关于</a>
             </div>
-            <div class="right">
+            <div id="right">
                 <img v-show="theme === 'dark'" src="/static/my/img/nav/light.svg" alt="" @click="setTheme('light')">
                 <img v-show="theme === 'light'" src="/static/my/img/nav/dark.svg" alt="" @click="setTheme('dark')">
                 <a href="#">登录</a>
                 <a href="#">注册</a>
             </div>
         </nav>
-        <header>
-            {% for img in img_list %}
-            <div class="dynamic_shuffle">
-                <img src="{{ img }}" alt="">
-            </div>
-            {% endfor %}
-        </header>
+        {% banner 'index' %}
         <main>
             内容区域
         </main>
         <footer>      
-            底部信息栏
+            <div class="left">
+                <p class="thank">Thank for</p>
+                <p class="site_info">
+                    <span><img src="/static/my/img/footer/tencent.png" alt=""> 腾讯云服务器 </span>
+                    <span><img src="/static/my/img/footer/tencent.png" alt=""> 腾讯云SSL证书 </span>
+                    <span><img src="/static/my/img/footer/qiniu.png" alt=""> 七牛云存储 </span>
+                </p>
+                <p class="version">
+                    <span>version</span>
+                    <span>1.0.0</span>
+                </p>
+                <p>建站日期: 2022年12月27日</p>
+                <p class="beian">
+                    <a href="https://beian.mitt.gov.cn"><img src="/static/my/img/footer/beian.png" alt="">备案号</a>
+                </p>
+            </div>
+            <div class="right">
+                <div class="contact">
+                    <img class="svg" src="/static/my/img/footer/qq_icon.svg" alt="">
+                    <img class="qq" src="/static/my/img/footer/qq.png" alt="">
+                </div>
+                <p>
+                    联系邮箱: 3099097649@qq.com
+                </p>
+            </div>
         </footer>
     </div>
     <script>
@@ -69,7 +88,7 @@
         let menu_length = menu_imgs.length;
         let index = 0;
         let timer = null;
-        clearInterval(timer)
+        clearInterval(timer);
         timer = setInterval(()=>{
             index++;
             if (index === menu_length) {
